@@ -20,13 +20,12 @@ class FabricanteDatatable extends DataTable
     public function dataTable($query)
     {
         return datatables()
-            ->eloquent($query);
-        
-        return Datatables::of($fabricantes)
+            ->eloquent($query)
             ->addColumn('action', function ($fabricante) {
-            return '<a href="#edit-'.$fabricante->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
-            
-        });
+                $action = '<a href="' . route('fabricante.edit', $fabricante->id) . '" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-edit"></i>Editar</a>';
+                $action .= ' <a type="button" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i>Excluir</a>';
+                return $action;
+            });
     }
 
     /**
@@ -70,7 +69,7 @@ class FabricanteDatatable extends DataTable
     protected function getColumns()
     {
         return [
-            // Column::computed('action')
+            
             //       ->exportable(false)
             //       ->printable(false)
             //       ->width(60)
@@ -79,7 +78,7 @@ class FabricanteDatatable extends DataTable
             Column::make('nome'),
             Column::make('site'),
             Column::make('created_at'),
-            Column::make('actin'),
+            Column::computed('action'),
         ];
     }
 

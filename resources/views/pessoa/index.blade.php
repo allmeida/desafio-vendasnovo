@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Lista de Fabricantes')
+@section('title', 'Lista de Pessoas')
 
 @section('content_header')
-    <h1>Lista de Fabricantes</h1>
+    <h1>Lista de Pessoas</h1>
 @stop
 
 @section('content')
@@ -19,6 +19,5 @@
 @stop
 
 @section('js')
-<script src="/vendor/datatables/buttons.server-side.js"></script>
     {!! $dataTable->scripts() !!}
 @stop
