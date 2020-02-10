@@ -19,6 +19,5 @@
 @stop
 
 @section('js')
-<script src="/vendor/datatables/buttons.server-side.js"></script>
     {!! $dataTable->scripts() !!}
 @stop

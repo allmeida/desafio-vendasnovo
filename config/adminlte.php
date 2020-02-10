@@ -204,11 +204,6 @@ return [
             'active' => true,
             'files' => [
                 [
-                    'type' => 'js',
-                    'asset' => false,
-                    'location' => '//cdn.datatables.net/v/bs/dt-1.10.18/datatables.min.js',
-                ],
-                [
                     'type' => 'css',
                     'asset' => false,
                     'location' => '//cdn.datatables.net/v/bs/dt-1.10.18/datatables.min.css',
@@ -221,7 +216,17 @@ return [
                 [
                     'type' => 'js',
                     'asset' => false,
+                    'location' => '//cdn.datatables.net/v/bs/dt-1.10.18/datatables.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => false,
                     'location' => 'https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => '/vendor/datatables/buttons.server-side.js',
                 ],
             ],
         ],
