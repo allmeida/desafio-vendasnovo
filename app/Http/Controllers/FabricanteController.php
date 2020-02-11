@@ -66,8 +66,9 @@ class FabricanteController extends Controller
      * @param  \App\Fabricante  $fabricante
      * @return \Illuminate\Http\Response
      */
-    public function edit(Fabricante $fabricante)
+    public function edit($id)
     {
+        $fabricante = Fabricante::find($id);
         return view('fabricante.form', compact('fabricante'));
     }
 

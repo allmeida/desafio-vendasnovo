@@ -17,9 +17,9 @@
     @csrf
     
         {!! Form::label('nome', 'Nome Fabricante') !!}
-        {!! Form::text('nome', old('nome'), ['class' => 'form-control']) !!}
+        {!! Form::text('nome') !!}
         {!! Form::label('site', 'Site Fabricante') !!}
-        {!! Form::text('site', old('site'), ['class' => 'form-control']) !!}
+        {!! Form::text('site') !!}
         <br>
         {!! Form::submit('Salvar', ['class' => 'btn btn-primary btn-sm']) !!}
     {!! Form::close() !!}
