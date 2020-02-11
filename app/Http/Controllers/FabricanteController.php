@@ -40,11 +40,13 @@ class FabricanteController extends Controller
         //dd($request->all());
         try {
             Fabricante::create($request->all());
-
-            return redirect()->route('fabricante.index');
+            flash('Fabricante salvo com sucesso')->success();
+            
         } catch (\Exception $e) {
+            flash('Erro ao salvar Fabricante')->error();
             return back()->withInput();
         }
+        return redirect()->route('fabricante.index');
     }
 
     /**
@@ -80,7 +82,9 @@ class FabricanteController extends Controller
     {
         try {
             $fabricante->update($request->all());
+            flash('Fabricante atualizado com sucesso')->success();
         } catch (\Exception $e) {
+            flash('Erro ao atualizar Fabricante')->error();
             return back()->withInput();
         }
         return redirect()->route('fabricante.index');
@@ -96,6 +100,8 @@ class FabricanteController extends Controller
     {
         $fabricante = Fabricante::find($id);
         $fabricante->delete();
+
+        flash('Fabricante excluido com sucesso')->success();
 
         return view('fabricante.index');
     }

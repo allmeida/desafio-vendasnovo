@@ -3,6 +3,7 @@
 @section('title', 'Lista de Fabricantes')
 
 @section('content_header')
+    @include('flash::message')
     <h1>Lista de Fabricantes</h1>
 @stop
 
