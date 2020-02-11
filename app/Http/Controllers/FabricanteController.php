@@ -92,8 +92,11 @@ class FabricanteController extends Controller
      * @param  \App\Fabricante  $fabricante
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Fabricante $fabricante)
+    public function destroy($id)
     {
-        //
+        $fabricante = Fabricante::find($id);
+        $fabricante->delete();
+
+        return view('fabricante.index');
     }
 }

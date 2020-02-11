@@ -19,4 +19,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('/fabricante', 'FabricanteController');
+Route::resource('/fabricante', 'FabricanteController', ['except' => ['destroy']]);
+    Route::get('fabricante/{fabricante}/delete', 'FabricanteController@destroy')->name('fabricante.destroy');

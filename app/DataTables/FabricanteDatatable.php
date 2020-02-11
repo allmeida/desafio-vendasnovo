@@ -23,7 +23,7 @@ class FabricanteDatatable extends DataTable
             ->eloquent($query)
             ->addColumn('action', function ($fabricante) {
                 $action = '<a href="' . route('fabricante.edit', $fabricante->id) . '" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-edit"></i>Editar</a>';
-                $action .= ' <a type="button" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i>Excluir</a>';
+                $action .= ' <a href="' . route('fabricante.destroy', $fabricante->id) . '" type="button" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i>Excluir</a>';
                 return $action;
             });
     }
