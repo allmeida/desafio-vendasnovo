@@ -7,14 +7,23 @@
 @stop
 
 @section('content')
-{!! Form::open(['url' => route('fabricante.store')]) !!}
-    {!! Form::label('nome', 'Nome Fabricante') !!}
-    {!! Form::text('nome') !!}
-    {!! Form::label('site', 'Site Fabricante') !!}
-    {!! Form::text('site') !!}
 
-    {!! Form::submit('Salvar') !!}
-{!! Form::close() !!}
+    @if(isset($fabricante))
+        {!! Form::model($fabricante, ['method' => 'PUT', 'route' => ['fabricante.update', $fabricante->id] ]) !!}
+        
+    @else
+        {!! Form::open(['url' => route('fabricante.store'), 'method' => 'post']) !!}
+    @endif
+    @csrf
+    
+        {!! Form::label('nome', 'Nome Fabricante') !!}
+        {!! Form::text('nome', old('nome'), ['class' => 'form-control']) !!}
+        {!! Form::label('site', 'Site Fabricante') !!}
+        {!! Form::text('site', old('site'), ['class' => 'form-control']) !!}
+        <br>
+        {!! Form::submit('Salvar', ['class' => 'btn btn-primary btn-sm']) !!}
+    {!! Form::close() !!}
+
 @stop
 
 @section('css')

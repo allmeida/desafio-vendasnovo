@@ -66,7 +66,7 @@ class FabricanteController extends Controller
      */
     public function edit(Fabricante $fabricante)
     {
-        //
+        return view('fabricante.form', compact('fabricante'));
     }
 
     /**
@@ -78,7 +78,12 @@ class FabricanteController extends Controller
      */
     public function update(Request $request, Fabricante $fabricante)
     {
-        //
+        try {
+            $fabricante->update($request->all());
+        } catch (\Exception $e) {
+            return back()->withInput();
+        }
+        return redirect()->route('fabricante.index');
     }
 
     /**
