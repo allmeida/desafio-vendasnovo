@@ -34,7 +34,7 @@ class PessoaDatatable extends DataTable
                         ' Excluir',
                         ['class' =>
                             'btn btn-sm btn-danger far fa-trash-alt',
-                            'onclick' => "delete($pessoa->id)"
+                            'onclick' => "excluir ('" . route('pessoa.destroy', $pessoa) . "')"
                         ]
                     );
             return $acoes;

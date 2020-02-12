@@ -172,6 +172,7 @@
         });
     }
 </script>
+
     @stack('js')
     
     @yield('js')

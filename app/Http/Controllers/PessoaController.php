@@ -39,10 +39,10 @@ class PessoaController extends Controller
         //dd($request->all());
         try {
             Pessoa::create($request->all());
-            flash('Pessoa salva com sucesso')->success();
+            flash('Salvo com sucesso')->success();
             
         } catch (\Exception $error) {
-            flash('Erro ao salvar Pessoa')->error();
+            flash('Erro ao salvar')->error();
             return back()->withInput();
         }
         return redirect()->route('pessoa.index');
@@ -82,9 +82,9 @@ class PessoaController extends Controller
     {
         try {
             $pessoa->update($request->all());
-            flash('Pessoa atualizada com sucesso')->success();
+            flash('Atualizado com sucesso')->success();
         } catch (\Exception $e) {
-            flash('Erro ao atualizar Pessoa')->error();
+            flash('Erro ao atualizar')->error();
             return back()->withInput();
         }
         return redirect()->route('pessoa.index');
@@ -98,11 +98,10 @@ class PessoaController extends Controller
      */
     public function destroy($id)
     {
-        $pessoa = Pessoa::find($id);
-        $pessoa->delete();
-
-        flash('Pessoa excluida com sucesso')->success();
-
-        return view('pessoa.index');
+        try {
+            Pessoa::find($id)->delete();
+        } catch (\Throwable $th) {
+            abort(403, 'Erro Excluir');
+        }
     }
 }
