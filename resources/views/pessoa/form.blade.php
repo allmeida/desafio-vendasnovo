@@ -27,7 +27,7 @@
                 {!! Form::text('email') !!}
                 
                 {!! Form::label('cep', 'Cep') !!}
-                {!! Form::text('cep')"!!}
+                {!! Form::text('cep') !!}
             
                 {!! Form::label('logradouro', 'Logradouro') !!}
                 {!! Form::text('logradouro') !!}
