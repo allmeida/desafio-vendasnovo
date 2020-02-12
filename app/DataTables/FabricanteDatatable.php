@@ -34,7 +34,7 @@ class FabricanteDatatable extends DataTable
                             ' Excluir',
                             ['class' =>
                                 'btn btn-sm btn-danger far fa-trash-alt',
-                                'onclick' => "delete($fabricante->id)"
+                                'onclick' => "excluir ('" . route('fabricante.destroy', $fabricante) . "')"
                             ]
                         );
                 return $acoes;

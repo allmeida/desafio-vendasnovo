@@ -40,13 +40,12 @@ class FabricanteController extends Controller
         //dd($request->all());
         try {
             Fabricante::create($request->all());
-            flash('Fabricante salvo com sucesso')->success();
-            
-        } catch (\Exception $error) {
-            flash('Erro ao salvar Fabricante')->error();
+            flash('Salvo com sucesso')->success();
+            return redirect()->route('fabricante.index');
+        } catch (\Throwable $th) {
+            flash('Ops! Ocorreu um erro ao salvar')->error();
             return back()->withInput();
         }
-        return redirect()->route('fabricante.index');
     }
 
     /**
@@ -68,8 +67,14 @@ class FabricanteController extends Controller
      */
     public function edit($id)
     {
-        $fabricante = Fabricante::find($id);
-        return view('fabricante.form', compact('fabricante'));
+        try {
+            return view('fabricante.form', [
+                'fabricante' =>  Fabricante::findOrFail($id)
+            ]);
+        } catch (\Throwable $th) {
+            flash('Ops! Ocorreu um erro ao selecionar')->error();
+            return redirect()->route('fabricante.index');
+        }
     }
 
     /**
@@ -79,16 +84,16 @@ class FabricanteController extends Controller
      * @param  \App\Fabricante  $fabricante
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Fabricante $fabricante)
+    public function update(Request $request, $id)
     {
         try {
-            $fabricante->update($request->all());
-            flash('Fabricante atualizado com sucesso')->success();
-        } catch (\Exception $e) {
-            flash('Erro ao atualizar Fabricante')->error();
+            Fabricante::find($id)->update($request->all());
+            flash('Atualizado com sucesso')->success();
+            return redirect()->route('fabricante.index');
+        } catch (\Throwable $th) {
+            flash('Ops! Ocorreu um erro ao atualisar')->error();
             return back()->withInput();
         }
-        return redirect()->route('fabricante.index');
     }
 
     /**
@@ -99,11 +104,10 @@ class FabricanteController extends Controller
      */
     public function destroy($id)
     {
-        $fabricante = Fabricante::find($id);
-        $fabricante->delete();
-
-        flash('Fabricante excluido com sucesso')->success();
-
-        return view('fabricante.index');
+        try {
+            Fabricante::find($id)->delete();
+        } catch (\Throwable $th) {
+            abort(403, 'Erro excluir');
+        }
     }
 }
