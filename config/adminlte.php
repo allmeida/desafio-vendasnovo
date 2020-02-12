@@ -138,14 +138,16 @@ return [
                 [
                     'text' => 'Pessoas',
                     'icon' => 'fa fa-users',
-                    'url'  => '#',
+                    'url'  => 'pessoa',
                 ],
                 [
                     'text' => 'Fabricantes',
+                    'icon' => 'fas fa-industry',
                     'url'  => 'fabricante',
                 ],
                 [
                     'text' => 'Produtos',
+                    'icon' => '',
                     'url'  => '#',
                 ],
             ],

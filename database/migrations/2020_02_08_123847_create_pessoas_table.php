@@ -22,7 +22,7 @@ class CreatePessoasTable extends Migration
             $table->string('logradouro', 100);
             $table->string('bairro', 50);
             $table->string('localidade', 50);
-            $table->string('grupo');
+            $table->integer('grupo');
             $table->timestamps();
         });
     }

@@ -42,7 +42,7 @@ class FabricanteController extends Controller
             Fabricante::create($request->all());
             flash('Fabricante salvo com sucesso')->success();
             
-        } catch (\Exception $e) {
+        } catch (\Exception $error) {
             flash('Erro ao salvar Fabricante')->error();
             return back()->withInput();
         }

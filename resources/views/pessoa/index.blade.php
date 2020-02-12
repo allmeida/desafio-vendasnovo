@@ -3,6 +3,7 @@
 @section('title', 'Lista de Pessoas')
 
 @section('content_header')
+    @include('flash::message')
     <h1>Lista de Pessoas</h1>
 @stop
 
