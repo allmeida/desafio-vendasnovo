@@ -27,16 +27,16 @@
                 {!! Form::text('email') !!}
                 
                 {!! Form::label('cep', 'Cep') !!}
-                {!! Form::text('cep') !!}
+                {!! Form::text('cep', null, ['placeholder' => 'Cep', 'onfocusout' => 'buscaCep()']) !!}
             
                 {!! Form::label('logradouro', 'Logradouro') !!}
-                {!! Form::text('logradouro') !!}
+                {!! Form::text('logradouro', null, ['placeholder' => 'Logradouro', 'onfocusout' => 'buscaCep()']) !!}
             
                 {!! Form::label('bairro', 'Bairro') !!}
-                {!! Form::text('bairro') !!}
+                {!! Form::text('bairro', null, ['placeholder' => 'Bairro', 'onfocusout' => 'buscaCep()']) !!}
                 
                 {!! Form::label('localidade', 'Localidade') !!}
-                {!! Form::text('localidade') !!}
+                {!! Form::text('localidade', null, ['placeholder' => 'Localidade', 'onfocusout' => 'buscaCep()']) !!}
             
                 {!! Form::label('grupo', 'Grupo') !!}
                 {!! Form::number('grupo') !!}
@@ -53,5 +53,21 @@
 @stop
 
 @section('js')
-     
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        function buscaCep() {
+            let cep = document.getElementById('cep').value;
+            let url = 'https://viacep.com.br/ws/' + cep + '/json/';
+            
+            axios.get(url)
+                .then(function (response) {
+                    document.getElementById('logradouro').value = response.data.logradouro
+                    document.getElementById('bairro').value = response.data.bairro
+                    document.getElementById('localidade').value = response.data.localidade
+                })
+                .catch(function (error) {
+                    alert('Ops! CEP não encontrado');
+                })
+        }
+    </script>  
 @stop

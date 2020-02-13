@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\ProdutoDatatable;
 use App\Produto;
 use Illuminate\Http\Request;
 
@@ -12,9 +13,9 @@ class ProdutoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(ProdutoDatatable $produtoDatatable)
     {
-        //
+        return $produtoDatatable->render('produto.index');
     }
 
     /**
@@ -24,7 +25,7 @@ class ProdutoController extends Controller
      */
     public function create()
     {
-        //
+        return view('produto.form');
     }
 
     /**
@@ -35,7 +36,16 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request->all());
+        try {
+            Produto::create($request->all());
+            flash('Salvo com sucesso')->success();
+            
+        } catch (\Throwable $th) {
+            flash('Erro ao salvar')->error();
+            return back()->withInput();
+        }
+        return redirect()->route('produto.index');
     }
 
     /**
@@ -55,9 +65,10 @@ class ProdutoController extends Controller
      * @param  \App\Produto  $produto
      * @return \Illuminate\Http\Response
      */
-    public function edit(Produto $produto)
+    public function edit($id)
     {
-        //
+        $produto = Produto::find($id);
+        return view('produto.form', compact('produto'));
     }
 
     /**
@@ -69,7 +80,14 @@ class ProdutoController extends Controller
      */
     public function update(Request $request, Produto $produto)
     {
-        //
+        try {
+            $produto->update($request->all());
+            flash('Atualizado com sucesso')->success();
+        } catch (\Throwable $th) {
+            flash('Erro ao atualizar')->error();
+            return back()->withInput();
+        }
+        return redirect()->route('produto.index');
     }
 
     /**
@@ -78,8 +96,12 @@ class ProdutoController extends Controller
      * @param  \App\Produto  $produto
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Produto $produto)
+    public function destroy($id)
     {
-        //
+        try {
+            Produto::find($id)->delete();
+        } catch (\Throwable $th) {
+            abort(403, 'Erro Excluir');
+        }
     }
 }

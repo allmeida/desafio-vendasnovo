@@ -41,7 +41,7 @@ class PessoaController extends Controller
             Pessoa::create($request->all());
             flash('Salvo com sucesso')->success();
             
-        } catch (\Exception $error) {
+        } catch (\Throwable $th) {
             flash('Erro ao salvar')->error();
             return back()->withInput();
         }
@@ -83,7 +83,7 @@ class PessoaController extends Controller
         try {
             $pessoa->update($request->all());
             flash('Atualizado com sucesso')->success();
-        } catch (\Exception $e) {
+        } catch (\Throwable $th) {
             flash('Erro ao atualizar')->error();
             return back()->withInput();
         }

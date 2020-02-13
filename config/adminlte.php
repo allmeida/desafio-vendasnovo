@@ -147,8 +147,8 @@ return [
                 ],
                 [
                     'text' => 'Produtos',
-                    'icon' => '',
-                    'url'  => '#',
+                    'icon' => 'fas fa-archive',
+                    'url'  => 'produto',
                 ],
             ],
         ],
