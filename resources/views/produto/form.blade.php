@@ -25,8 +25,11 @@
         {!! Form::label('preco_venda', 'Preço_Venda') !!}
         {!! Form::number('preco_venda') !!}
 
-        {!! Form::label('uidade_medida', 'Unidade_Medida') !!}
-        {!! Form::number('uidade_medida') !!}
+        {!! Form::label('fabricante_id', 'Fabricante') !!}
+        {!! Form::select('fabricante_id', $fabricantes) !!}
+
+        {!! Form::label('unidade_medida', 'Unidade') !!}
+        {!! Form::number('unidade_medida') !!}
         <br>
         {!! Form::submit('Salvar', ['class' => 'btn btn-primary btn-sm']) !!}
     {!! Form::close() !!}

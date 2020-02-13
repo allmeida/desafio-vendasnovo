@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\ProdutoDatatable;
+use App\Fabricante;
 use App\Produto;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,8 @@ class ProdutoController extends Controller
      */
     public function create()
     {
-        return view('produto.form');
+        $fabricantes = Fabricante::all()->pluck('nome', 'id');
+        return view('produto.form', compact('fabricantes'));
     }
 
     /**
@@ -40,12 +42,12 @@ class ProdutoController extends Controller
         try {
             Produto::create($request->all());
             flash('Salvo com sucesso')->success();
-            
+            return redirect()->route('produto.index');
         } catch (\Throwable $th) {
-            flash('Erro ao salvar')->error();
+            //dd($th);
+            flash('Ops! Ocorreu um erro ao salvar')->error();
             return back()->withInput();
         }
-        return redirect()->route('produto.index');
     }
 
     /**

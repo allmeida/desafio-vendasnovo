@@ -38,10 +38,15 @@
                 {!! Form::label('localidade', 'Localidade') !!}
                 {!! Form::text('localidade', null, ['placeholder' => 'Localidade', 'onfocusout' => 'buscaCep()']) !!}
             
-                {!! Form::label('grupo', 'Grupo') !!}
-                {!! Form::number('grupo') !!}
+                {!! Form::label('grupo') !!}
+                {!! Form::select('grupo', [
+                                    '0' => 'Cliente',
+                                    '1' => 'Fornecedor',
+                                    '2' => 'Revendedor',
+                                    '3' => 'Colaborador',
+                ]); !!}
                 <br>
-                {!! Form::submit('Salvar') !!}
+                {!! Form::submit('Salvar', ['class' => 'btn btn-primary btn-sm']) !!}
             
         </div>
     {!! Form::close() !!}

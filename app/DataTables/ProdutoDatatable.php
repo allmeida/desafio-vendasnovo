@@ -21,24 +21,24 @@ class ProdutoDatatable extends DataTable
     public function dataTable($query)
     {
         return datatables()
-        ->eloquent($query)
-        ->addColumn('action', function ($produto) {
+            ->eloquent($query)
+            ->addColumn('action', function ($produto) {
 
-            $acoes = link_to(
-                        route('produto.edit', $produto),
-                        ' Editar',
-                        ['class' => 'btn btn-sm btn-primary far fa-edit']
-            );
+                $acoes = link_to(
+                            route('produto.edit', $produto),
+                            ' Editar',
+                            ['class' => 'btn btn-sm btn-primary far fa-edit']
+                );
 
-            $acoes .= FormFacade::button(
-                        ' Excluir',
-                        ['class' =>
-                            'btn btn-sm btn-danger far fa-trash-alt',
-                            'onclick' => "excluir ('" . route('produto.destroy', $produto) . "')"
-                        ]
-                    );
-            return $acoes;
-        });
+                $acoes .= FormFacade::button(
+                            ' Excluir',
+                            ['class' =>
+                                'btn btn-sm btn-danger far fa-trash-alt',
+                                'onclick' => "excluir ('" . route('produto.destroy', $produto) . "')"
+                            ]
+                        );
+                return $acoes;
+            });
     }
 
     /**
@@ -87,7 +87,9 @@ class ProdutoDatatable extends DataTable
             Column::make('estoque'),
             Column::make('preco_custo'),
             Column::make('preco_venda'),
+            Column::make('fabricante_id'),
             Column::make('unidade_medida'),
+            Column::make('created_at'),
             Column::computed('action')
                     ->title('Ações')
                     ->exportable(false)
