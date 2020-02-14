@@ -26,8 +26,8 @@ class ProdutoController extends Controller
      */
     public function create()
     {
-        $fabricantes = Fabricante::all()->pluck('nome', 'id');
-        return view('produto.form', compact('fabricantes'));
+        $fabricante = Fabricante::all()->pluck('nome', 'id');
+        return view('produto.form', compact('fabricante'));
     }
 
     /**
@@ -69,8 +69,19 @@ class ProdutoController extends Controller
      */
     public function edit($id)
     {
-        $produto = Produto::find($id);
-        return view('produto.form', compact('produto'));
+        try {
+            $fabricante = Fabricante::all()->pluck('nome');
+            return view('produto.form', compact('fabricante'), [
+                'produto' => Produto::findOrFail($id)
+            ]);
+        } catch (\Throwable $th) {
+            //dd($th);
+            flash('Ops! Ocorreu um erro ao salvar')->error();
+            return back()->withInput();
+        }
+        
+        
+        
     }
 
     /**

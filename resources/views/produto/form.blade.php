@@ -26,7 +26,7 @@
         {!! Form::number('preco_venda') !!}
 
         {!! Form::label('fabricante_id', 'Fabricante') !!}
-        {!! Form::select('fabricante_id', $fabricantes) !!}
+        {!! Form::select('fabricante_id', $fabricante) !!}
 
         {!! Form::label('unidade_medida', 'Unidade') !!}
         {!! Form::number('unidade_medida') !!}

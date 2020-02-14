@@ -13,13 +13,17 @@
     @else
         {!! Form::open(['url' => route('fabricante.store')]) !!}
     @endif
+    <div class="form-group">
         {!! Form::label('nome', 'Nome Fabricante') !!}
         {!! Form::text('nome') !!}
-
+    </div>
+    <div class="form-group">
         {!! Form::label('site', 'Site Fabricante') !!}
         {!! Form::text('site') !!}
-        <br>
+    </div>
+    <div class="form-group">
         {!! Form::submit('Salvar', ['class' => 'btn btn-primary btn-sm']) !!}
+    </div>
     {!! Form::close() !!}
 
 @stop
