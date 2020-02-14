@@ -16,28 +16,35 @@
     @endif
     @csrf
         <div class="box-body">
-            
+            <div class="form-group">
                 {!! Form::label('nome', 'Nome') !!}
-                {!! Form::text('nome') !!}
-            
+                {!! Form::text('nome', null, ['class' => 'form-control']) !!}
+            </div>
+            <div class="form-group">
                 {!! Form::label('telefone', 'Telefone') !!}
-                {!! Form::text('telefone') !!}
-            
+                {!! Form::text('telefone', null, ['class' => 'form-control']) !!}
+            </div>
+            <div class="form-group">
                 {!! Form::label('email', 'Email') !!}
-                {!! Form::text('email') !!}
-                
+                {!! Form::text('email', null, ['class' => 'form-control']) !!}
+            </div>
+            <div class="form-group">    
                 {!! Form::label('cep', 'Cep') !!}
-                {!! Form::text('cep', null, ['placeholder' => 'Cep', 'onfocusout' => 'buscaCep()']) !!}
-            
+                {!! Form::text('cep', null, ['class' => 'form-control', 'placeholder' => 'Cep', 'onfocusout' => 'buscaCep()']) !!}
+            </div>
+            <div class="form-group">
                 {!! Form::label('logradouro', 'Logradouro') !!}
-                {!! Form::text('logradouro', null, ['placeholder' => 'Logradouro', 'onfocusout' => 'buscaCep()']) !!}
-            
+                {!! Form::text('logradouro', null, ['class' => 'form-control', 'placeholder' => 'Logradouro', 'onfocusout' => 'buscaCep()']) !!}
+            </div>
+            <div class="form-group">
                 {!! Form::label('bairro', 'Bairro') !!}
-                {!! Form::text('bairro', null, ['placeholder' => 'Bairro', 'onfocusout' => 'buscaCep()']) !!}
-                
+                {!! Form::text('bairro', null, ['class' => 'form-control', 'placeholder' => 'Bairro', 'onfocusout' => 'buscaCep()']) !!}
+            </div>
+            <div class="form-group">    
                 {!! Form::label('localidade', 'Localidade') !!}
-                {!! Form::text('localidade', null, ['placeholder' => 'Localidade', 'onfocusout' => 'buscaCep()']) !!}
-            
+                {!! Form::text('localidade', null, ['class' => 'form-control', 'placeholder' => 'Localidade', 'onfocusout' => 'buscaCep()']) !!}
+            </div>
+            <div class="form-group">
                 {!! Form::label('grupo') !!}
                 {!! Form::select('grupo', [
                                     '0' => 'Cliente',
@@ -45,9 +52,10 @@
                                     '2' => 'Revendedor',
                                     '3' => 'Colaborador',
                 ]); !!}
-                <br>
+            </div>
+            <div class="form-group">
                 {!! Form::submit('Salvar', ['class' => 'btn btn-primary btn-sm']) !!}
-            
+            </div>
         </div>
     {!! Form::close() !!}
 </div>

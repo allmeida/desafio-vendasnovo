@@ -79,9 +79,6 @@ class ProdutoController extends Controller
             flash('Ops! Ocorreu um erro ao salvar')->error();
             return back()->withInput();
         }
-        
-        
-        
     }
 
     /**
@@ -97,9 +94,8 @@ class ProdutoController extends Controller
             $produto->update($request->all());
             flash('Atualizado com sucesso')->success();
         } catch (\Throwable $th) {
-            dd($th);
-            //flash('Erro ao atualizar')->error();
-           // return back()->withInput();
+            flash('Erro ao atualizar')->error();
+            return back()->withInput();
         }
         return redirect()->route('produto.index');
     }
