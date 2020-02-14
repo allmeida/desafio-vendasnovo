@@ -15,11 +15,11 @@
     @endif
     <div class="form-group">
         {!! Form::label('nome', 'Nome Fabricante') !!}
-        {!! Form::text('nome') !!}
+        {!! Form::text('nome', null, ['class' => 'form-control']) !!}
     </div>
     <div class="form-group">
         {!! Form::label('site', 'Site Fabricante') !!}
-        {!! Form::text('site') !!}
+        {!! Form::text('site', null, ['class' => 'form-control']) !!}
     </div>
     <div class="form-group">
         {!! Form::submit('Salvar', ['class' => 'btn btn-primary btn-sm']) !!}

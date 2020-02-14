@@ -97,8 +97,9 @@ class ProdutoController extends Controller
             $produto->update($request->all());
             flash('Atualizado com sucesso')->success();
         } catch (\Throwable $th) {
-            flash('Erro ao atualizar')->error();
-            return back()->withInput();
+            dd($th);
+            //flash('Erro ao atualizar')->error();
+           // return back()->withInput();
         }
         return redirect()->route('produto.index');
     }
