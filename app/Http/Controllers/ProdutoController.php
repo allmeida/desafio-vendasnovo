@@ -26,8 +26,14 @@ class ProdutoController extends Controller
      */
     public function create()
     {
+        //dd(Produto::UNIDADE_MEDIDAS);
         $fabricante = Fabricante::all()->pluck('nome', 'id');
-        return view('produto.form', compact('fabricante'));
+        $unidades_medidas = Produto::UNIDADES_MEDIDAS;
+        
+        return view('produto.form',[
+            'fabricante' => $fabricante,
+            'unidades_medidas' => $unidades_medidas
+        ]);
     }
 
     /**
@@ -70,7 +76,7 @@ class ProdutoController extends Controller
     public function edit($id)
     {
         try {
-            $fabricante = Fabricante::all()->pluck('nome');
+            $fabricante = Fabricante::all()->pluck('nome','id');
             return view('produto.form', compact('fabricante'), [
                 'produto' => Produto::findOrFail($id)
             ]);

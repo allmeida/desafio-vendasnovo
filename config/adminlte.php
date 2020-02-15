@@ -156,6 +156,7 @@ return [
         [
             'text'       => 'Vendas',
             'icon_color' => 'red',
+            'url'        => 'venda',
         ],
         [
             'text'       => 'Relatórios',

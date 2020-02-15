@@ -32,11 +32,11 @@
             </div>
             <div class="form-group">
                 {!! Form::label('fabricante_id', 'Fabricante')!!}
-                {!! Form::select('fabricante_id', $fabricante) !!} 
+                {!! Form::select('fabricante_id', $fabricante, null, ['class' => 'form-control']) !!} 
             </div>
             <div class="form-group">
-                {!! Form::label('unidade_medida', 'Unidade') !!}
-                {!! Form::number('unidade_medida') !!}
+                {!! Form::label('unidade_medida', 'Unidade de Medida') !!}
+                {!! Form::select('unidade_medida',$unidades_medidas, null, ['class' => 'form-control']) !!}
             </div>
             <div class="form-group">
                 {!! Form::submit('Salvar', ['class' => 'btn btn-primary btn-sm']) !!}

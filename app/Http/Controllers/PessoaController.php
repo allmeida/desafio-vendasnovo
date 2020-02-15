@@ -25,6 +25,7 @@ class PessoaController extends Controller
      */
     public function create()
     {
+        $grupos = Pessoa::GRUPOS;
         return view('pessoa.form');
     }
 
@@ -104,4 +105,23 @@ class PessoaController extends Controller
             abort(403, 'Erro Excluir');
         }
     }
+
+    public function listaClientes(Request $request) {
+        
+        $termoPesquisa = trim($request->searchTerm);
+
+        if (empty($termoPesquisa)) {
+            return Pessoa::select('id', 'nome as text')
+                            ->where('grupo', Pessoa::CLIENTE)
+                            ->limit(10)
+                            ->get();
+        }
+
+        return Pessoa::select('id', 'nome as text')
+                            ->where('grupo', Pessoa::CLIENTE)
+                            ->where('nome', 'like', '%' . $termoPesquisa . '%')
+                            ->limit(10)
+                            ->get();
+    }
+    
 }

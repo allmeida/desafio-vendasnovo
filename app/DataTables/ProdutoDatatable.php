@@ -2,6 +2,7 @@
 
 namespace App\DataTables;
 
+use App\Fabricante;
 use App\Produto;
 use Collective\Html\FormFacade;
 use Yajra\DataTables\Html\Button;
@@ -38,6 +39,16 @@ class ProdutoDatatable extends DataTable
                             ]
                         );
                 return $acoes;
+            
+            })
+            ->editColumn('fabricante_id', function($produto) {
+                return Fabricante::find($produto->fabricante_id)->nome;
+            })
+            ->editColumn('unidade_medida', function($produto) {
+                return Produto::UNIDADES_MEDIDAS[$produto->unidade_medida];
+            })
+            ->editColumn('created_at', function($produto) {
+                return $produto->created_at->format('d/m/Y');
             });
     }
 

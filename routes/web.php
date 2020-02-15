@@ -24,3 +24,7 @@ Route::resource('/pessoa', 'PessoaController');
 Route::resource('/fabricante', 'FabricanteController');
 
 Route::resource('/produto', 'ProdutoController');
+
+Route::resource('venda', 'VendaController');
+
+Route::get('lista-clientes', 'PessoaController@listaClientes');
