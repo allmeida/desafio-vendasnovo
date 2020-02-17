@@ -3,7 +3,6 @@
 @section('title', 'Lista de Vendas')
 
 @section('content_header')
-    @include('flash::message')
     <h1>Lista de Vendas</h1>
 @stop
 
@@ -16,7 +15,7 @@
 @stop
 
 @section('css')
-    
+
 @stop
 
 @section('js')

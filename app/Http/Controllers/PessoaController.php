@@ -41,7 +41,7 @@ class PessoaController extends Controller
         try {
             Pessoa::create($request->all());
             flash('Salvo com sucesso')->success();
-            
+
         } catch (\Throwable $th) {
             flash('Erro ao salvar')->error();
             return back()->withInput();
@@ -106,8 +106,8 @@ class PessoaController extends Controller
         }
     }
 
-    public function listaClientes(Request $request) {
-        
+    public function listaClientes(Request $request)
+    {
         $termoPesquisa = trim($request->searchTerm);
 
         if (empty($termoPesquisa)) {
@@ -123,5 +123,5 @@ class PessoaController extends Controller
                             ->limit(10)
                             ->get();
     }
-    
+
 }

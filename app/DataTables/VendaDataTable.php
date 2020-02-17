@@ -50,7 +50,6 @@ class VendaDataTable extends DataTable
                     ->orderBy(1)
                     ->buttons(
                         Button::make('create'),
-                        Button::make('export'),
                         Button::make('print'),
                         Button::make('reset'),
                         Button::make('reload')
@@ -67,9 +66,7 @@ class VendaDataTable extends DataTable
         return [
             Column::computed('action')
                   ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
+                  ->printable(false),
             Column::make('id'),
             Column::make('pessoa_id'),
             Column::make('observacao'),

@@ -29,7 +29,7 @@ class ProdutoController extends Controller
         //dd(Produto::UNIDADE_MEDIDAS);
         $fabricante = Fabricante::all()->pluck('nome', 'id');
         $unidades_medidas = Produto::UNIDADES_MEDIDAS;
-        
+
         return view('produto.form',[
             'fabricante' => $fabricante,
             'unidades_medidas' => $unidades_medidas
@@ -62,9 +62,13 @@ class ProdutoController extends Controller
      * @param  \App\Produto  $produto
      * @return \Illuminate\Http\Response
      */
-    public function show(Produto $produto)
+    public function show($id)
     {
-        //
+        try {
+            return Produto::findOrfail($id);
+        } catch (\Throwable $th) {
+            abort(403, 'Erro ao selecionar o produto');
+        }
     }
 
     /**
@@ -119,5 +123,21 @@ class ProdutoController extends Controller
         } catch (\Throwable $th) {
             abort(403, 'Erro Excluir');
         }
+    }
+
+    public function listaProdutos(Request $request)
+    {
+        $termoPesquisa = trim($request->searchTerm);
+
+        if (empty($termoPesquisa)) {
+            return Produto::select('id', 'descricao as text')
+                            ->limit(10)
+                            ->get();
+        }
+
+        return Produto::select('id', 'descricao as text')
+                            ->where('descricao', 'like', '%' . $termoPesquisa . '%')
+                            ->limit(10)
+                            ->get();
     }
 }
