@@ -2,6 +2,7 @@
 
 namespace App\DataTables;
 
+use App\Pessoa;
 use App\Venda;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
@@ -21,7 +22,18 @@ class VendaDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'venda.action');
+            ->addColumn('action', function ($venda) {
+
+                $acoes = link_to(route('venda.show', $venda),
+                    ' Ver',
+                    ['class' => 'btn btn-sm btn-primary']);
+                })
+                ->editColumn('pessoa_id', function ($venda){
+                    return $venda->pessoa->nome;
+                })
+                ->editColumn('create_at', function ($venda){
+                    return $venda->create_at->format('d/m/Y');
+                });
     }
 
     /**
@@ -50,9 +62,8 @@ class VendaDataTable extends DataTable
                     ->orderBy(1)
                     ->buttons(
                         Button::make('create'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
+                        Button::make('export'),
+                        Button::make('print')
                     );
     }
 
@@ -64,15 +75,15 @@ class VendaDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            Column::make('pessoa_id')->title('Cliente'),
+            Column::make('desconto')->title('Desconto'),
+            Column::make('acrescimo')->title('Acréscimo'),
+            Column::make('total')->title('Total'),
+            Column::make('created_at')->title('Data da Venda'),
             Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false),
-            Column::make('id'),
-            Column::make('pessoa_id'),
-            Column::make('observacao'),
-            Column::make('desconto'),
-            Column::make('acrescimo'),
-            Column::make('updated_at'),
+                    ->title('Ações')
+                    ->exportable(false)
+                    ->printable(false),
         ];
     }
 

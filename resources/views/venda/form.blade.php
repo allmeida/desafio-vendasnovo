@@ -3,20 +3,20 @@
 @section('title', 'Formulário de Vendas')
 
 @section('content_header')
-    <h1>Formulário de Vendas</h1>
+    <h1>Formulário de Venda</h1>
 @stop
 
 @section('content')
 
-    <form action="{{ route('venda.store') }}" method="post">
+    <form action="{{ route('venda.store') }}" method="post" id="form-venda">
         @csrf
             <div class="form-group">
                 <label for="pessoa_id">Cliente</label>
-                <select class="form-control" name="'pessoa_id'" id="select_clientes"></select>
+                <select class="form-control" name="pessoa_id" id="select-clientes"></select>
             </div>
             <div class="form-group">
                 <label for="observacao">Observação</label>
-                <textarea name="form-control" name="observacao" id="observacao" cols="3" rows="10"></textarea>
+                <textarea class="form-control" name="observacao" id="observacao" cols="3" rows="10"></textarea>
             </div>
             <div>
                 <button type="submit" class="btn btn-primary">Finalizar Venda</button>
@@ -74,15 +74,24 @@
 
 @section('js')
 <script>
-    var total-Geral = 0;
+    var totalGeral = 0;
 
-    $('#select-clientes').select2( {
+    $('#form-venda').submit(function(){
+        if (totalGeral == 0) {
+            bootbox.alert('Ops! A venda precisa ter pelo menos um produto');
+            return false;
+        }
+
+        return true;
+    });
+
+    $('#select-clientes').select2({
         ajax: {
             url: '{{ route('lista.clientes') }}',
             dataType: 'json',
             data: function (params) {
                 return {
-                    serchTerm: params.term
+                    searchTerm: params.term
                 };
             },
             processResults: function (response) {
@@ -92,14 +101,13 @@
             },
         }
     });
-
-    $('#select-produtos').select2( {
+    $('#select-produtos').select2({
         ajax: {
             url: '{{ route('lista.produtos') }}',
             dataType: 'json',
             data: function (params) {
                 return {
-                    serchTerm: params.term
+                    searchTerm: params.term
                 };
             },
             processResults: function (response) {
@@ -108,14 +116,6 @@
                 };
             },
         }
-    });
-
-    $('#form-venda').submit(function(){
-        if (totalGeral == 0) {
-            bootbox.alert('Ops!, A venda precisa ter pelo menos um produto');
-            return false;
-        }
-        return true;
     });
 
     function adicionarProduto() {
@@ -123,12 +123,12 @@
         let quantidade = $('#quantidade_add').val();
 
         if (produto && quantidade) {
-            axios.get('{{ route('produtos.index') }}/' + produto)
+            axios.get('{{ route('produto.index') }}/' + produto)
                 .then((response) => {
                     exibirItem(response.data, quantidade);
                 })
-                catch((error) => {
-                    bootbox.alert('Ops!, Erro ao selecionar o produto');
+                .catch((error) => {
+                    bootbox.alert('Ops! Erro ao selecionar o produto');
                 });
         } else {
             bootbox.alert('Escolha o produto e informe a quantidade');
@@ -140,17 +140,16 @@
         let total = parseFloat(produto.preco_venda) * quantidade;
         totalGeral += total;
 
-        let item = "<tr>";
-            item += "<th><input class='form-control' value='" + produto.descricao + "' disabled";
-            item += "<input style='display:none' name='produto_id[]' value='" + produto.id + "' readonIy></th>";
-            item += "<th><input class='form-control' name='quantidade[]' value='" + quantidade + "' readonIy></th>";
+        let item =  "<tr>";
+            item += "<th><input class='form-control' value='" + produto.descricao + "' disabled>";
+            item += "<input style='display:none' name='produto_id[]' value='" + produto.id + "' readonly></th>";
+            item += "<th><input class='form-control' name='quantidade[]' value='" + quantidade + "' readonly></th>";
             item += "<th><input class='form-control' value='" + produto.preco_venda + "' disabled></th>";
             item += "<th><input class='form-control' value='" + total.toFixed(2) + "' disabled></th>";
             item += "</tr>";
 
         $('#total-geral').html('Total: ' + totalGeral.toFixed(2));
         $('#itens-venda').append(item);
-
     }
 </script>
 
