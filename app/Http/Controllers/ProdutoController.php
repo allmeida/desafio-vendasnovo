@@ -9,21 +9,12 @@ use Illuminate\Http\Request;
 
 class ProdutoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index(ProdutoDatatable $produtoDatatable)
     {
         return $produtoDatatable->render('produto.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //dd(Produto::UNIDADE_MEDIDAS);
@@ -36,12 +27,6 @@ class ProdutoController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //dd($request->all());
@@ -56,12 +41,6 @@ class ProdutoController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Produto  $produto
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         try {
@@ -71,33 +50,24 @@ class ProdutoController extends Controller
         }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Produto  $produto
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         try {
             $fabricante = Fabricante::all()->pluck('nome','id');
-            return view('produto.form', compact('fabricante'), [
-                'produto' => Produto::findOrFail($id)
+            $unidades_medidas = Produto::UNIDADES_MEDIDAS;
+
+            return view('produto.form', [
+                'produto' => Produto::findOrFail($id),
+                'fabricante' => $fabricante,
+                'unidade_medida' => $unidades_medidas
             ]);
         } catch (\Throwable $th) {
             //dd($th);
-            flash('Ops! Ocorreu um erro ao salvar')->error();
-            return back()->withInput();
+            flash('Ops! Ocorreu um erro ao selecionar')->error();
+            return redirect()->route('produto.index');
         }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Produto  $produto
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Produto $produto)
     {
         try {
@@ -110,12 +80,6 @@ class ProdutoController extends Controller
         return redirect()->route('produto.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Produto  $produto
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         try {
