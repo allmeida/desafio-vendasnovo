@@ -89,7 +89,7 @@ class VendaController extends Controller
      * @param  \App\Venda  $venda
      * @return \Illuminate\Http\Response
      */
-    public function show(Venda $venda)
+    public function show($id)
     {
         try {
             $venda = Venda::find($id);

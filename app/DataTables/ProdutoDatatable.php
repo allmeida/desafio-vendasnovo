@@ -39,7 +39,7 @@ class ProdutoDatatable extends DataTable
                             ]
                         );
                 return $acoes;
-            
+
             })
             ->editColumn('fabricante_id', function($produto) {
                 return Fabricante::find($produto->fabricante_id)->nome;
@@ -71,7 +71,7 @@ class ProdutoDatatable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('produtodatatable-table')
+                    ->setTableId('produto-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
@@ -79,9 +79,7 @@ class ProdutoDatatable extends DataTable
                     ->buttons(
                         Button::make('create'),
                         Button::make('export'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
+                        Button::make('print')
                     );
     }
 
@@ -93,7 +91,6 @@ class ProdutoDatatable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id'),
             Column::make('descricao'),
             Column::make('estoque'),
             Column::make('preco_custo'),

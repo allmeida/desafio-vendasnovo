@@ -26,7 +26,7 @@ class PessoaController extends Controller
     public function create()
     {
         $grupos = Pessoa::GRUPOS;
-        return view('pessoa.form');
+        return view('pessoa.form', compact('grupos'));
     }
 
     /**
@@ -41,12 +41,11 @@ class PessoaController extends Controller
         try {
             Pessoa::create($request->all());
             flash('Salvo com sucesso')->success();
-
+            return redirect()->route('pessoa.index');
         } catch (\Throwable $th) {
             flash('Erro ao salvar')->error();
             return back()->withInput();
         }
-        return redirect()->route('pessoa.index');
     }
 
     /**
@@ -68,8 +67,15 @@ class PessoaController extends Controller
      */
     public function edit($id)
     {
-        $pessoa = Pessoa::find($id);
-        return view('pessoa.form', compact('pessoa'));
+        try {
+            return view('pessoa.form', [
+                'pessoa' => Pessoa::findOrFail($id),
+                'grupos' => Pessoa::GRUPOS
+            ]);
+        } catch (\Throwable $th) {
+            flash('Ops! Ocorreu um erro ao selecionar')->error();
+            return redirect()->route('pessoa.index');
+        }
     }
 
     /**
@@ -82,13 +88,13 @@ class PessoaController extends Controller
     public function update(Request $request, Pessoa $pessoa)
     {
         try {
-            $pessoa->update($request->all());
+            Pessoa::find($id)->update($request->all());
             flash('Atualizado com sucesso')->success();
+            return redirect()->route('pessoa.index');
         } catch (\Throwable $th) {
-            flash('Erro ao atualizar')->error();
+            flash('Ops! Ocorreu um erro ao atualizar')->error();
             return back()->withInput();
         }
-        return redirect()->route('pessoa.index');
     }
 
     /**

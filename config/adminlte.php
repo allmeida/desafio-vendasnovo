@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 2',
+    'title' => 'SysVendas',
 
     'title_prefix' => '',
 
@@ -30,9 +30,9 @@ return [
     |
     */
 
-    'logo' => '<b>Vendas</b>',
+    'logo' => '<b>SysVendas</b>',
 
-    'logo_mini' => '<b>A</b>LT',
+    'logo_mini' => '<b>S</b>V',
 
     /*
     |--------------------------------------------------------------------------
@@ -128,9 +128,9 @@ return [
     */
 
     'menu' => [
-        
+
         ['header' => 'Menu Principal'],
-    
+
         [
             'text'    => 'Cadastros',
             'icon'    => 'fas fa-address-card',
@@ -152,17 +152,17 @@ return [
                 ],
             ],
         ],
-        
+
         [
             'text'       => 'Vendas',
-            'icon_color' => 'red',
+            'icon'       => 'fas fa-shopping-cart',
             'url'        => 'venda',
         ],
         [
             'text'       => 'Relatórios',
-            'icon_color' => 'yellow',
+            'icon'       => 'fas fa-sticky-note',
         ],
-        
+
     ],
 
     /*

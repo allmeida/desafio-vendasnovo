@@ -23,17 +23,16 @@ class VendaDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addColumn('action', function ($venda) {
-
-                $acoes = link_to(route('venda.show', $venda),
-                    ' Ver',
-                    ['class' => 'btn btn-sm btn-primary']);
-                })
-                ->editColumn('pessoa_id', function ($venda){
-                    return $venda->pessoa->nome;
-                })
-                ->editColumn('create_at', function ($venda){
-                    return $venda->create_at->format('d/m/Y');
-                });
+                return link_to( route('venda.show', $venda),
+                'Ver',
+                ['class' => 'btn btn-sm btn-primary']);
+            })
+            ->editColumn('pessoa_id', function ($venda) {
+                return $venda->pessoa->nome;
+            })
+            ->editColumn('created_at', function ($venda) {
+                return $venda->created_at->format('d/m/Y');
+            });
     }
 
     /**
@@ -81,7 +80,6 @@ class VendaDataTable extends DataTable
             Column::make('total')->title('Total'),
             Column::make('created_at')->title('Data da Venda'),
             Column::computed('action')
-                    ->title('Ações')
                     ->exportable(false)
                     ->printable(false),
         ];

@@ -44,7 +44,7 @@
                         <input class="form-control" type="number" id="quantidade_add">
                     </div>
                     <div class="form-group col-sm-1">
-                        <label for="pessoa-id">Ação</label>
+                        <label for="pessoa_id">Ação</label>
                         <button type="button" class="btn btn-primary" onclick="adicionarProduto()">Adicionar</button>
                     </div>
                 </div>
