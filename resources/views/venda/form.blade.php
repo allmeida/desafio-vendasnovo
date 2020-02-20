@@ -18,9 +18,16 @@
                 <label for="observacao">Observação</label>
                 <textarea class="form-control" name="observacao" id="observacao" cols="3" rows="10"></textarea>
             </div>
+            <div class="form-froup">
+                {!! Form::label('forma_pagamento', 'Forma de Pagamento')  !!}
+                {!! Form::select('forma_pagamento', $formas_pagamento, null,
+                ['class' => 'form-control', 'onchange' => 'formaPagamento()'])  !!}
+            </div>
             <div>
                 <button type="submit" class="btn btn-primary">Finalizar Venda</button>
                 <span id="total-geral" style="font-size: 25px; margin-left: 25px;">Total: 0.0</span>
+                <span id="total-desconto" style="font-size: 25px; margin-left: 25px;">Com Desconto: 0.0</span>
+                <span id="total-acrescimo" style="font-size: 25px; margin-left: 25px;">Com Acréscimo: 0.0</span>
             </div>
 
             <div style="height: 15px;"></div>
@@ -75,6 +82,8 @@
 @section('js')
 <script>
     var totalGeral = 0;
+    var totalComDesconto = 0;
+    var totalComAcrescimo = 0;
 
     $('#form-venda').submit(function(){
         if (totalGeral == 0) {
@@ -150,6 +159,26 @@
 
         $('#total-geral').html('Total: ' + totalGeral.toFixed(2));
         $('#itens-venda').append(item);
+
+        formaPagamento();
+    }
+
+    function formaPagamento(){
+        let forma_pagamento = $('#forma_pagamento').val();
+
+        if(totalGeral > 0) {
+            if (forma_pagamento == 0) {
+                totalComDesconto = totalGeral - 5 / 100 * totalGeral
+                $('#total-desconto').html('Com Desconto: ' + totalComDesconto.toFixed(2));
+                $('#total-acrescimo').html('Com Acréscimo: 0.0');
+            } else if(forma_pagamento == 1) {
+                totalComAcrescimo = 10 / 100 * totalGeral + totalGeral
+                $('#total-acrescimo').html('Com Acréscimo: '  + totalComAcrescimo.toFixed(2));
+                $('#total-desconto').html('Com Desconto: 0.0');
+            }
+
+            $('#total-geral').html('Total: ' + totalGeral.toFixed(2));
+        }
     }
 </script>
 
