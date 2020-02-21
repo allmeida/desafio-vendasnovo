@@ -26,3 +26,5 @@ Route::resource('/venda', 'VendaController');
 
 Route::get('lista-clientes', 'PessoaController@listaClientes')->name('lista.clientes');
 Route::get('lista-produtos', 'ProdutoController@listaProdutos')->name('lista.produtos');
+
+//Route::get('pessoa/relatorio', 'PessoaController@relatorio')->name('relatorio.pessoas');
