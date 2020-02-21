@@ -130,4 +130,10 @@ class PessoaController extends Controller
                             ->get();
     }
 
+    public function relatorio() {
+        $pessoas = Pessoa::all();
+            return \PDF::loadView('pessoa.pdf', compact('pessoas'))->stream();
+    }
+
+
 }

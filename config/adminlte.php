@@ -161,6 +161,25 @@ return [
         [
             'text'       => 'Relatórios',
             'icon'       => 'fas fa-sticky-note',
+            'submenu' => [
+                [
+                    'text' => 'Pessoas',
+                    'icon' => 'fas fa-sticky-note',
+                    'url'  => 'relatoriopessoa',
+                ],
+                [
+                    'text' => 'Fabricantes',
+                    'icon' => 'fas fa-sticky-note',
+                ],
+                [
+                    'text' => 'Prdutos',
+                    'icon' => 'fas fa-sticky-note',
+                ],
+                [
+                    'text' => 'Vendas',
+                    'icon' => 'fas fa-sticky-note',
+                ],
+            ],
         ],
 
     ],
