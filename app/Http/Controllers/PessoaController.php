@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\PessoaDatatable;
+use App\Http\Requests\PessoaRequest;
 use App\Pessoa;
 use Illuminate\Http\Request;
 
@@ -35,9 +36,9 @@ class PessoaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PessoaRequest $request)
     {
-        //dd($request->all());
+        dd($request->all());
         try {
             Pessoa::create($request->all());
             flash('Salvo com sucesso')->success();

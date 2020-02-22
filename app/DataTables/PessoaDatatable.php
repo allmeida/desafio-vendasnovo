@@ -85,6 +85,7 @@ class PessoaDatatable extends DataTable
             Column::make('id'),
             Column::make('nome'),
             Column::make('telefone'),
+            Column::make('cpf'),
             Column::make('email'),
             Column::make('cep'),
             Column::make('logradouro'),
